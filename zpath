@@ -1,0 +1,45 @@
+#!/bin/zsh
+
+#
+# This file is used to set the path for zsh.
+# the file .zpath-`hostname` is used for host specific path info
+#
+
+export PATH=/usr/local/bin:$PATH
+export MANPATH=/usr/local/man:`/usr/bin/manpath -q`
+export INFOPATH=$INFOPATH:/usr/local/info:/usr/share/info
+#export LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH
+
+export TWL_BIN=~/bin
+export TWL_DOC=~/Library/Documentation
+export TWL_LIB=~/lib
+export TWL_MAN=~/man
+export TWL_JAVA_LIBS=$TWL_LIB/java
+export TWL_PYTHON_LIBS=$TWL_LIB/python
+export WORK=~/work
+export TOMCAT_HOME=$TWL_JAVA_LIBS/apache-tomcat-5.5.20
+export M2_HOME=$TWL_JAVA_LIBS/apache-maven-2.2.0
+export HUDSON_HOME=$TWL_JAVA_LIBS/hudson
+export SCALA_HOME=~/work/scala/scala-2.8
+export ERLANG_MAN=~/work/mac/erlang/otp_src_R13B01/man
+
+# Amazon EC2 setup via: http://www.robertsosinski.com/2008/01/26/starting-amazon-ec2-with-mac-os-x/
+export EC2_HOME=~/.ec2
+#export EC2_PRIVATE_KEY=`ls $EC2_HOME/pk-*.pem`
+#export EC2_CERT=`ls $EC2_HOME/cert-*.pem`
+
+export INFOPATH=$INFOPATH:$TWL_DOC/python/info
+export MANPATH=$TWL_MAN:$GIT_HOME/man:$ERLANG_MAN:$MANPATH
+#export FPATH=$TWL_LIB/zsh/func:$FPATH
+export LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH
+
+export PATH=$SCALA_HOME/bin:$M2_HOME/bin:$TWL_BIN/perl:$TWL_BIN/`uname -s`:$TWL_BIN:/usr/local/bin:$PATH
+
+oszpath=~/.oh-my-zsh/zpath-`uname -s`
+[[ -e $oszpath ]] && . $oszpath
+
+#hostzpath=~/.zpath-`~/bin/hostname`
+#[[ -e $hostzpath ]] && . $hostzpath
+
+# unique entries only
+typeset -U cdpath fpath infopath manpath path

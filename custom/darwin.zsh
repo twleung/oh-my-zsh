@@ -1,0 +1,103 @@
+#!/bin/zsh
+
+cdpath=($cdpath $HOME/Library "$HOME/Library/Application Support")
+
+alias top='/usr/bin/top -ocpu -R -F -s 2 -n30'
+
+alias battery-ioreg='ioreg -l | grep -i IOBatteryInfo'
+alias subEthaEdit='open -a SubEthaEdit '
+alias SubEthaEdit='open -a SubEthaEdit '
+alias md5sum='/sbin/md5'
+
+# hibernation control on OS X - via http://www.almaer.com/blog/archives/001182.html
+alias hibernateon='sudo pmset -a hibernatemode 1' 
+alias hibernateoff='sudo pmset -a hibernatemode 0'
+
+# quit and relaunch from http://www.macosxhints.com/article.php?story=20040623231530448
+quit () {
+        for app in $*; do
+                osascript -e 'quit app "'$app'"'
+        done
+}
+
+relaunch () {
+        for app in $*; do
+                osascript -e 'quit app "'$app'"';
+                open -a $app
+        done
+}
+
+# use highlight to highlight a python file for printing
+pyhighlight () { highlight -Spy -sprint -i $1 -o ~/tmp/$1:t.html }
+pypp () { a2ps --line-numbers=1 --chars-per-line=100 $1 }
+
+#
+# NetNewsWire aliases
+#
+
+#these 2 alias are now shell scripts
+alias compareNNWTabs='diff ~/Library/Application\ Support/NetNewsWire/Tabs.plist ~/Documents/NNW/Tabs.plist'
+#alias nnwTabUrls='xpath-query.py -q "/plist/array/dict/key[text() = \"url\"]/following-sibling::string/text()" ~/Library/Application\ Support/NetNewsWire/BrowserTabs.plist'
+alias grabciteulike='saveCiteULike.py >/tmp/c;cat ~/citeulike /tmp/c |sort |uniq >| /tmp/d; mv /tmp/d ~/citeulike'
+alias killFlickrThumbs='find ~/Library/Caches/NetNewsWire/TabThumbnails.noindex -type f -a -name "*_flickr_com_photos*" -a -atime +3 -exec rm {} \;'
+
+alias killds_stores='find . -type f -a -name .DS_Store -exec rm {} \;'
+
+# quicksilver dates via http://forums.blacktree.com/viewtopic.php?p=6192#6192
+alias qsdatefull="date \"+%Y/%m/%d (%a) @ %H:%M:%S\" | qs"
+alias qsdateonly="date \"+%Y/%m/%d\" | qs"
+alias qsdatetime="date \"+%H:%M:%S\" | qs" 
+
+# via jwalker@codefab.com on osxhack
+alias killem='IFSTemp=$IFS IFS=$IFS[3] thePS=(`ps`); IFS=$IFSTemp; select i in $thePS; do; if [[ x$REPLY = xq ]] then break; fi; echo kill $i[(w)1]; kill $i[(w)1]; done'
+
+# check for dictionary attacks - via http://www.macintouch.com/security-mon.html
+function check-dict-attacks() {
+  sudo grep "failed to auth" /var/log/secure.log \
+  | sed "s/^.*user \(.*\) for.*$/\1/" | sort | uniq -c
+}
+
+# via http://www.commandlinefu.com/commands/view/2440/use-quicklook-from-the-command-line-without-verbose-output
+function qlook() { qlmanage -p "$@" >& /dev/null & }
+
+alias twget='http_proxy=$TOR_PROXY wget'
+alias tcurl='http_proxy=$TOR_PROXY curl'
+
+#via http://weblog.savanne.be/153-performance-tip-of-the-day
+function vacuum-firefox () {
+  for f in ~/Library/Application\ Support/Firefox/Profiles/*/*.sqlite; do
+    sqlite3 "$f" 'VACUUM;'; 
+  done
+}
+
+autoload -U add-zsh-hook
+add-zsh-hook precmd stopwatch_precmd
+add-zsh-hook preexec stopwatch_preexec
+
+# via http://www.macosxhints.com/article.php?story=20071009124425468
+
+# called before each command and starts stopwatch
+function stopwatch_preexec () {
+	export PREEXEC_CMD="$1"
+	export PREEXEC_TIME=$(date +'%s')
+#	print $PREEXEC_CMD >>/tmp/log
+#	print $PREEXEC_TIME >>/tmp/log
+}
+
+
+# called after each command, stops stopwatch
+# and notifies if time elpsed exceeds threshold
+function stopwatch_precmd () {
+	stop=$(date +'%s')
+	start=${PREEXEC_TIME:-$stop}
+	let elapsed=$(($stop-$start))
+#	print "precmd $PREEXEC_TIME" >>/tmp/log
+#	print $start >>/tmp/log
+#	print $stop >>/tmp/log
+#	print $elapsed >>/tmp/log
+	max=${PREEXEC_MAX:-30}
+	
+	if [[ $elapsed > $max ]]; then
+		growlnotify -n "iTerm" -m "took $elapsed secs" ${PREEXEC_CMD:-Some Command}
+	fi
+}

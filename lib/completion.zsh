@@ -8,8 +8,12 @@ setopt always_to_end
 
 WORDCHARS=''
 
-autoload -U compinit
-compinit -i
+# something bad is happening with completion, which can be manually fixed by
+# autoload -Uz compinit; compinit -u
+# http://www.zsh.org/mla/users/2007/msg00733.html
+
+autoload -Uz compinit
+compinit -u
 
 zmodload -i zsh/complist
 
@@ -31,12 +35,21 @@ zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#) ([0-9a-z-
 zstyle ':completion:*:*:*:*:processes' command "ps -u `whoami` -o pid,user,comm -w -w"
 
 # disable named-directories autocompletion
-zstyle ':completion:*:cd:*' tag-order local-directories directory-stack path-directories
-cdpath=(.)
-
+#zstyle ':completion:*:cd:*' tag-order local-directories directory-stack path-directories
+#cdpath=(.)
 
 # Load known hosts file for auto-completion with ssh and scp commands
 if [ -f ~/.ssh/known_hosts ]; then
   zstyle ':completion:*' hosts $( sed 's/[, ].*$//' $HOME/.ssh/known_hosts )
   zstyle ':completion:*:*:(ssh|scp):*:*' hosts `sed 's/^\([^ ,]*\).*$/\1/' ~/.ssh/known_hosts`
 fi
+
+setopt hashcmds hashdirs hashlistall
+setopt completealiases nolistbeep listrowsfirst autoremoveslash listpacked listtypes
+setopt braceccl extendedglob markdirs numericglobsort
+setopt autoparamkeys autoparamslash
+setopt equals magicequalsubst
+setopt badpattern
+
+# completion ignored extensions
+fignore=(~ .bak .class .old .o .pyc .elc CVS)

@@ -11,3 +11,16 @@ setopt long_list_jobs
 ## pager
 export PAGER=less
 export LC_CTYPE=en_US.UTF-8
+
+# TWL
+export REPORTTIME=5
+export READNULLCMD='less'
+
+setopt nohup ignoreeof
+setopt noclobber
+setopt printexitvalue
+
+setopt autocontinue checkjobs
+setopt pathdirs
+setopt chaselinks
+

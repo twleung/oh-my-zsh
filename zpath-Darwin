@@ -1,0 +1,13 @@
+#!/bin/zsh
+# set base path
+
+#export GIT_HOME=/usr/local/git
+
+export PATH=/usr/local/share/npm/bin:/Developer/Tools:$PATH
+
+# no /opt/local/bin on OS X so remove
+export PATH=${PATH/:\/opt\/local\/bin//}
+
+if (( EUID == 0 )); then
+    export PATH=$PATH:/sbin:/usr/sbin:/usr/local/sbin
+fi

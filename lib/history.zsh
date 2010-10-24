@@ -14,3 +14,9 @@ setopt hist_ignore_space
 
 setopt SHARE_HISTORY
 setopt APPEND_HISTORY
+
+# TWL
+DIRSTACKSIZE='20'
+setopt histfindnodups histignorealldups histreduceblanks
+setopt hist_allow_clobber
+

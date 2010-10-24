@@ -1,0 +1,87 @@
+#!/bin/zsh
+
+# this file sets up commands and options for interactive shells only
+
+######################################################################
+#
+# zsh specific
+#
+######################################################################
+
+
+#directory stack options
+#setopt pushdminus
+
+# misc
+#setopt cshjunkiehistory
+
+
+#quoting is barftastic
+#alias top-cmds='history|awk \'{a[$2]++} END{for(i in a){printf "%5d\t%s \n",a[i],i}}\'|sort -rn|head'
+
+
+#swap 2 cvs dirs, like a pristine HEAD and a local working copy
+swap-cvs-dirs() {
+    BASE=$1
+    HEAD=$BASE.HEAD
+    LOCAL=$BASE.TWL
+    TEMP=$BASE.TMP
+
+    if [[ -e $HEAD ]]; then # Currently using local working coyp
+	mv $BASE $TEMP
+	mv $HEAD $BASE
+	mv $TEMP $LOCAL
+    elif [[ -e $LOCAL ]]; then # Currently using CVS HEAD
+	mv $BASE $TEMP
+	mv $LOCAL $BASE
+	mv $TEMP $HEAD
+    fi
+}
+
+###############################################################################
+
+oszshrc=$HOME/.zshrc-`uname -s`
+[[ -e $oszshrc ]] && . $oszshrc
+
+#hostzshrc=$HOME/.zshrc-`$HOME/bin/hostname`
+#[[ -e $hostzshrc ]] && . $hostzshrc
+
+#
+# New completion system
+#
+
+# The following lines were added by compinstall
+
+zstyle ':completion:*' auto-description 'specify: %d'
+#zstyle ':completion:*' completer _expand _complete _correct _approximate
+zstyle ':completion:*' completer _complete _correct _approximate
+zstyle ':completion:*' completions 1
+zstyle ':completion:*' expand prefix suffix
+zstyle ':completion:*' glob 1
+zstyle ':completion:*' insert-unambiguous true
+zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+zstyle ':completion:*' list-prompt %SAt %p: Hit TAB for more, or the character to insert%s
+zstyle ':completion:*' list-suffixes true
+zstyle ':completion:*' max-errors 3 not-numeric
+zstyle ':completion:*' original true
+zstyle ':completion:*' prompt '%e>'
+zstyle ':completion:*' substitute 1
+zstyle ':completion:*' verbose true
+zstyle ':completion:*:descriptions' format '%B%d%b'
+zstyle ':completion:*:messages' format '%d'
+zstyle ':completion:*:warnings' format 'No matches for: %d'
+zstyle ':completion:*' group-name ''
+
+zstyle :compinstall filename "$HOME/.zshrc"
+
+hosts=(`/usr/bin/cut -d' ' -f1 $HOME/.ssh/known_hosts | /usr/bin/cut -d',' -f1`)
+zstyle ':completion:*' hosts $hosts
+
+#
+zstyle ':completion:*:*:*:users' ignored-patterns \
+        appserver cyrus daemon eppc lp mailman mysql \
+        nobody postfix qtss smmsp sshd unknown
+
+autoload -U compinit
+compinit -u
+# End of lines added by compinstall
