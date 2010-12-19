@@ -170,6 +170,8 @@ ztweet() {
  curl -u twleung:zztop1 -d status=\"$*\" http://twitter.com/statuses/update.xml
 }
 
+typeset -U dirstack
+
 # via http://radio.weblogs.com/0100945/2005/04/27.html#a604
 zq () {
   # function zq -- cd, qualified by searching the dirstack.
@@ -180,7 +182,7 @@ zq () {
 #  echo pushd ${(j:\ :)argv[2,${#argv}]}
   eval pushd "${(j:\ :)argv[2,${#argv}]}"
 }
-zstyle ':completion:*:*:zq:*:*' tag-order directory-stack
+#zstyle ':completion:*:*:zq:*:*' tag-order directory-stack
 
 
 # via http://radio.weblogs.com/0100945/2005/04/27.html#a604
@@ -217,7 +219,7 @@ remove-from-path () {
 }
 
 setopt cdablevars
-dirstack=(~ ~/work ~/work/clojure ~/work/scala ~/work/couchdb ~/work/js ~/work/node.js ~/.oh-my-zsh ~/.emacs.d ~/work/DIS)
+dirstack=(~ ~/work ~/work/clojure ~/work/scala ~/work/couchdb ~/work/js ~/work/js/node.js ~/.oh-my-zsh ~/.emacs.d ~/work/DIS)
 
 autoload zmv
 ttyctl -f
