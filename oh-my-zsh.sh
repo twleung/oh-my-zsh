@@ -10,6 +10,9 @@ for config_file ($ZSH/lib/*.zsh) source $config_file
 # Load all of your custom configurations from custom/
 for config_file ($ZSH/custom/*.zsh) source $config_file
 
+# Load platform specifc customizations
+for config_file ($ZSH/custom/`uname -s`/*.zsh) source $config_file
+
 # Load all of the plugins that were defined in ~/.zshrc
 plugin=${plugin:=()}
 for plugin ($plugins) source $ZSH/plugins/$plugin/$plugin.plugin.zsh

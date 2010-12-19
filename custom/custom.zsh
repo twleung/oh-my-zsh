@@ -1,7 +1,6 @@
 #!/bin/zsh
 
 export LESS='-CeMqs'
-export LESSOPEN="| $HOME/bin/lesspipe.sh %s"
 export PAGER='less'
 #export MANPAGER='most -s'
 
@@ -159,16 +158,57 @@ en1rs () { enscript -1rGp- -fCourier7 $* }
 en2 () { enscript -2rGp - $* }
 enl () { enscript -1Rlp - $* }
 
+# use highlight to highlight a python file for printing
+pyhighlight () { highlight -Spy -sprint -i $1 -o ~/tmp/$1:t.html }
+pypp () { a2ps --line-numbers=1 --chars-per-line=100 $1 }
+
 check-pgp-signed () {
   gpg --list-sigs $1 | grep twl@sauria.com
   gpg --list-sigs twl@sauria.com | grep $1
 }
+
+alias twget='http_proxy=$TOR_PROXY wget'
+alias tcurl='http_proxy=$TOR_PROXY curl'
+
+# via http://www.macosxhints.com/article.php?story=20071009124425468
+
+# called before each command and starts stopwatch
+function stopwatch_preexec () {
+	export PREEXEC_CMD="$1"
+	export PREEXEC_TIME=$(date +'%s')
+#	print $PREEXEC_CMD >>/tmp/log
+#	print $PREEXEC_TIME >>/tmp/log
+}
+
+
+# called after each command, stops stopwatch
+# and notifies if time elpsed exceeds threshold
+function stopwatch_precmd () {
+	stop=$(date +'%s')
+	start=${PREEXEC_TIME:-$stop}
+	let elapsed=$(($stop-$start))
+#	print "precmd $PREEXEC_TIME" >>/tmp/log
+#	print $start >>/tmp/log
+#	print $stop >>/tmp/log
+#	print $elapsed >>/tmp/log
+	max=${PREEXEC_MAX:-3}
+	
+	if [[ $elapsed > $max ]]; then
+		$SYSTEM_NOTIFIER "took $elapsed secs" ${PREEXEC_CMD:-Some Command}
+	fi
+}
+
+autoload -U add-zsh-hook
+add-zsh-hook precmd stopwatch_precmd
+add-zsh-hook preexec stopwatch_preexec
 
 # via http://www.20seven.org/blog/articles/2008/03/10/twitter-updates-from-terminal/
 # NOTE STILL BUGGY on quoting
 ztweet() {
  curl -u twleung:zztop1 -d status=\"$*\" http://twitter.com/statuses/update.xml
 }
+
+typeset -U dirstack
 
 # via http://radio.weblogs.com/0100945/2005/04/27.html#a604
 zq () {
@@ -180,7 +220,7 @@ zq () {
 #  echo pushd ${(j:\ :)argv[2,${#argv}]}
   eval pushd "${(j:\ :)argv[2,${#argv}]}"
 }
-zstyle ':completion:*:*:zq:*:*' tag-order directory-stack
+#zstyle ':completion:*:*:zq:*:*' tag-order directory-stack
 
 
 # via http://radio.weblogs.com/0100945/2005/04/27.html#a604
@@ -217,7 +257,7 @@ remove-from-path () {
 }
 
 setopt cdablevars
-dirstack=(~ ~/work ~/work/clojure ~/work/scala ~/work/couchdb ~/work/js ~/work/node.js ~/.oh-my-zsh ~/.emacs.d ~/work/DIS)
+dirstack=(~ ~/work ~/work/clojure ~/work/scala ~/work/couchdb ~/work/js ~/work/js/node.js ~/.oh-my-zsh ~/.emacs.d ~/work/DIS)
 
 autoload zmv
 ttyctl -f

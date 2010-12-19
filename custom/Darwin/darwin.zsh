@@ -1,4 +1,5 @@
 #!/bin/zsh
+export LESSOPEN="| $HOME/bin/lesspipe.sh %s"
 
 cdpath=($cdpath $HOME/Library "$HOME/Library/Application Support")
 
@@ -26,10 +27,6 @@ relaunch () {
                 open -a $app
         done
 }
-
-# use highlight to highlight a python file for printing
-pyhighlight () { highlight -Spy -sprint -i $1 -o ~/tmp/$1:t.html }
-pypp () { a2ps --line-numbers=1 --chars-per-line=100 $1 }
 
 #
 # NetNewsWire aliases
@@ -60,9 +57,6 @@ function check-dict-attacks() {
 # via http://www.commandlinefu.com/commands/view/2440/use-quicklook-from-the-command-line-without-verbose-output
 function qlook() { qlmanage -p "$@" >& /dev/null & }
 
-alias twget='http_proxy=$TOR_PROXY wget'
-alias tcurl='http_proxy=$TOR_PROXY curl'
-
 #via http://weblog.savanne.be/153-performance-tip-of-the-day
 function vacuum-firefox () {
   for f in ~/Library/Application\ Support/Firefox/Profiles/*/*.sqlite; do
@@ -70,34 +64,7 @@ function vacuum-firefox () {
   done
 }
 
-autoload -U add-zsh-hook
-add-zsh-hook precmd stopwatch_precmd
-add-zsh-hook preexec stopwatch_preexec
+export SYSTEM_NOTIFIER='growlnotify -n "iTerm" -m'
 
-# via http://www.macosxhints.com/article.php?story=20071009124425468
-
-# called before each command and starts stopwatch
-function stopwatch_preexec () {
-	export PREEXEC_CMD="$1"
-	export PREEXEC_TIME=$(date +'%s')
-#	print $PREEXEC_CMD >>/tmp/log
-#	print $PREEXEC_TIME >>/tmp/log
-}
-
-
-# called after each command, stops stopwatch
-# and notifies if time elpsed exceeds threshold
-function stopwatch_precmd () {
-	stop=$(date +'%s')
-	start=${PREEXEC_TIME:-$stop}
-	let elapsed=$(($stop-$start))
-#	print "precmd $PREEXEC_TIME" >>/tmp/log
-#	print $start >>/tmp/log
-#	print $stop >>/tmp/log
-#	print $elapsed >>/tmp/log
-	max=${PREEXEC_MAX:-30}
-	
-	if [[ $elapsed > $max ]]; then
-		growlnotify -n "iTerm" -m "took $elapsed secs" ${PREEXEC_CMD:-Some Command}
-	fi
-}
+[[ -e /usr/local/bin/virtualenvwrapper.sh ]] && . /usr/local/bin/virtualenvwrapper.sh
+workon darwin
