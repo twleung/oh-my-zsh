@@ -170,38 +170,6 @@ check-pgp-signed () {
 alias twget='http_proxy=$TOR_PROXY wget'
 alias tcurl='http_proxy=$TOR_PROXY curl'
 
-# via http://www.macosxhints.com/article.php?story=20071009124425468
-
-# called before each command and starts stopwatch
-function stopwatch_preexec () {
-	export PREEXEC_CMD="$1"
-	export PREEXEC_TIME=$(date +'%s')
-#	print $PREEXEC_CMD >>/tmp/log
-#	print $PREEXEC_TIME >>/tmp/log
-}
-
-
-# called after each command, stops stopwatch
-# and notifies if time elpsed exceeds threshold
-function stopwatch_precmd () {
-	stop=$(date +'%s')
-	start=${PREEXEC_TIME:-$stop}
-	let elapsed=$(($stop-$start))
-#	print "precmd $PREEXEC_TIME" >>/tmp/log
-#	print $start >>/tmp/log
-#	print $stop >>/tmp/log
-#	print $elapsed >>/tmp/log
-	max=${PREEXEC_MAX:-3}
-	
-	if [[ $elapsed > $max ]]; then
-		$SYSTEM_NOTIFIER "took $elapsed secs" ${PREEXEC_CMD:-Some Command}
-	fi
-}
-
-autoload -U add-zsh-hook
-add-zsh-hook precmd stopwatch_precmd
-add-zsh-hook preexec stopwatch_preexec
-
 # via http://www.20seven.org/blog/articles/2008/03/10/twitter-updates-from-terminal/
 # NOTE STILL BUGGY on quoting
 ztweet() {
