@@ -92,6 +92,9 @@ function stopwatch_precmd () {
 	fi
 }
 
+# via https://gist.github.com/808151
+alias to-github="grep github ./.git/config | sed -e 's/^.*\(github.com.*\)\.git$/\1/' -e 's/.*github\.com:*\/*/https:\/\/github.com\//' | xargs open"
+
 autoload -U add-zsh-hook
 add-zsh-hook precmd stopwatch_precmd
 add-zsh-hook preexec stopwatch_preexec
