@@ -23,6 +23,7 @@ export M2_HOME=$TWL_JAVA_LIBS/apache-maven-3.0.2
 export HUDSON_HOME=$TWL_JAVA_LIBS/hudson
 export SCALA_HOME=~/work/scala/scala-2.8
 export ERLANG_MAN=~/work/mac/erlang/otp_src_R13B01/man
+#export NODE_PATH=$WORK/js/node.js
 
 # Amazon EC2 setup via: http://www.robertsosinski.com/2008/01/26/starting-amazon-ec2-with-mac-os-x/
 export EC2_HOME=~/.ec2
@@ -31,7 +32,7 @@ export EC2_HOME=~/.ec2
 
 export INFOPATH=$INFOPATH:$TWL_DOC/python/info
 export MANPATH=$TWL_MAN:$GIT_HOME/man:$ERLANG_MAN:$MANPATH
-#export FPATH=$TWL_LIB/zsh/func:$FPATH
+export FPATH=$TWL_LIB/zsh/func:$FPATH
 export LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH
 
 export PATH=$SCALA_HOME/bin:$M2_HOME/bin:$TWL_BIN/perl:$TWL_BIN/`uname -s`:$TWL_BIN:/usr/local/bin:$PATH
