@@ -8,13 +8,6 @@ setopt always_to_end
 
 WORDCHARS=''
 
-# something bad is happening with completion, which can be manually fixed by
-# autoload -Uz compinit; compinit -u
-# http://www.zsh.org/mla/users/2007/msg00733.html
-
-autoload -Uz compinit
-compinit -u
-
 zmodload -i zsh/complist
 
 ## case-insensitive (all),partial-word and then substring completion
@@ -35,16 +28,38 @@ zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#) ([0-9a-z-
 zstyle ':completion:*:*:*:*:processes' command "ps -u `whoami` -o pid,user,comm -w -w"
 
 # disable named-directories autocompletion
-#zstyle ':completion:*:cd:*' tag-order local-directories directory-stack path-directories
-#cdpath=(.)
+zstyle ':completion:*:cd:*' tag-order local-directories directory-stack path-directories
+cdpath=(.)
 
-# Load known hosts file for auto-completion with ssh and scp commands
-if [ -f ~/.ssh/known_hosts ]; then
-  zstyle ':completion:*' hosts $( sed 's/[, ].*$//' $HOME/.ssh/known_hosts )
-  zstyle ':completion:*:*:(ssh|scp):*:*' hosts `sed 's/^\([^ ,]*\).*$/\1/' ~/.ssh/known_hosts`
-#  zstyle ':completion:*:*:(autossh|tscreen):*:*' hosts `sed 's/^\([^ ,]*\).*$/\1/' ~/.ssh/known_hosts`
-fi
+# use /etc/hosts and known_hosts for hostname completion
+[ -r ~/.ssh/known_hosts ] && _ssh_hosts=(${${${${(f)"$(<$HOME/.ssh/known_hosts)"}:#[\|]*}%%\ *}%%,*}) || _ssh_hosts=()
+[ -r /etc/hosts ] && : ${(A)_etc_hosts:=${(s: :)${(ps:\t:)${${(f)~~"$(</etc/hosts)"}%%\#*}##[:blank:]#[^[:blank:]]#}}} || _etc_hosts=()
+hosts=(
+  "$_ssh_hosts[@]"
+  "$_etc_hosts[@]"
+  `hostname`
+  localhost
+)
+zstyle ':completion:*:hosts' hosts $hosts
 
+# Use caching so that commands like apt and dpkg complete are useable
+zstyle ':completion::complete:*' use-cache 1
+zstyle ':completion::complete:*' cache-path ~/.oh-my-zsh/cache/
+
+# Don't complete uninteresting users
+zstyle ':completion:*:*:*:users' ignored-patterns \
+        adm amanda apache avahi beaglidx bin cacti canna clamav daemon \
+        dbus distcache dovecot fax ftp games gdm gkrellmd gopher \
+        hacluster haldaemon halt hsqldb ident junkbust ldap lp mail \
+        mailman mailnull mldonkey mysql nagios \
+        named netdump news nfsnobody nobody nscd ntp nut nx openvpn \
+        operator pcap postfix postgres privoxy pulse pvm quagga radvd \
+        rpc rpcuser rpm shutdown squid sshd sync uucp vcsa xfs
+
+# ... unless we really want to.
+zstyle '*' single-ignored show
+
+# TWL
 setopt hashcmds hashdirs hashlistall
 setopt completealiases nolistbeep listrowsfirst autoremoveslash listpacked listtypes
 setopt braceccl extendedglob markdirs numericglobsort
@@ -54,3 +69,4 @@ setopt badpattern
 
 # completion ignored extensions
 fignore=(~ .bak .class .old .o .pyc .elc CVS)
+
