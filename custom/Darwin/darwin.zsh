@@ -36,7 +36,10 @@ relaunch () {
 alias compareNNWTabs='diff ~/Library/Application\ Support/NetNewsWire/Tabs.plist ~/Documents/NNW/Tabs.plist'
 #alias nnwTabUrls='xpath-query.py -q "/plist/array/dict/key[text() = \"url\"]/following-sibling::string/text()" ~/Library/Application\ Support/NetNewsWire/BrowserTabs.plist'
 alias grabciteulike='saveCiteULike.py >/tmp/c;cat ~/citeulike /tmp/c |sort |uniq >| /tmp/d; mv /tmp/d ~/citeulike'
-alias killFlickrThumbs='find ~/Library/Caches/NetNewsWire/TabThumbnails.noindex -type f -a -name "*_flickr_com_photos*" -a -atime +3 -exec rm {} \;'
+function killThumbs() {
+  find ~/Library/Caches/NetNewsWire/TabThumbnails.noindex -type f -a -name "*_flickr_com_photos*" -a -atime +3 -exec rm {} \;
+  find ~/Library/Caches/NetNewsWire/TabThumbnails.noindex -type f -a -name "*500px_com*" -a -atime +3 -exec rm {} \;
+}
 
 alias killds_stores='find . -type f -a -name .DS_Store -exec rm {} \;'
 
