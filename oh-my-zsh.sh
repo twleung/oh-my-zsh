@@ -29,7 +29,19 @@ for config_file ($ZSH/custom/*.zsh) source $config_file
 for config_file ($ZSH/custom/`uname -s`/*.zsh) source $config_file
 
 # Load the theme
-source "$ZSH/themes/$ZSH_THEME.zsh-theme"
+# Check for updates on initial load...
+if [ "$ZSH_THEME" = "random" ]
+then
+  themes=($ZSH/themes/*zsh-theme)
+  N=${#themes[@]}
+  ((N=RANDOM%N))
+  RANDOM_THEME=${themes[$N]}
+  source "$RANDOM_THEME"
+  echo "[oh-my-zsh] Random theme '$RANDOM_THEME' loaded..."
+else
+  source "$ZSH/themes/$ZSH_THEME.zsh-theme"
+fi
+
 
 # Check for updates on initial load...
 if [ "$DISABLE_AUTO_UPDATE" = "true" ]
