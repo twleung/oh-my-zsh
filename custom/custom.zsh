@@ -225,7 +225,7 @@ remove-from-path () {
 }
 
 setopt cdablevars
-dirstack=(~ ~/work ~/work/clojure ~/work/scala ~/work/couchdb ~/work/js ~/work/js/node.js ~/.oh-my-zsh ~/.emacs.d ~/work/DIS)
+dirstack=(~ ~/work ~/work/clojure ~/work/scala ~/work/couchdb ~/work/js ~/work/js/node.js ~/work/js/coffeescript ~/work/haskell ~/work/erlang ~/work/cocoa ~/work/python ~/.oh-my-zsh ~/.emacs.d ~/work/DIS)
 
 autoload zmv
 ttyctl -f
