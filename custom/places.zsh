@@ -5,6 +5,7 @@ jlib="$TWL_LIB/java"
 pybin="$TWL_BIN/python"
 work=$WORK
 clojure="$WORK/clojure"
+cljs="$WORK/clojure/cljs"
 couch="$WORK/couchdb"
 js="$WORK/js"
 nodejs="$WORK/js/node.js"
