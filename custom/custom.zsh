@@ -169,6 +169,7 @@ check-pgp-signed () {
 
 alias twget='http_proxy=$TOR_PROXY wget'
 alias tcurl='http_proxy=$TOR_PROXY curl'
+alias whatismyip='curl automation.whatismyip.com/n09230945.asp'
 
 # via http://www.20seven.org/blog/articles/2008/03/10/twitter-updates-from-terminal/
 # NOTE STILL BUGGY on quoting
@@ -225,7 +226,7 @@ remove-from-path () {
 }
 
 setopt cdablevars
-dirstack=(~ ~/work ~/work/clojure ~/work/scala ~/work/couchdb ~/work/js ~/work/js/node.js ~/work/js/coffeescript ~/work/haskell ~/work/erlang ~/work/cocoa ~/work/python ~/.oh-my-zsh ~/.emacs.d ~/work/DIS)
+dirstack=(~ ~/work ~/work/clojure ~/work/clojure/cljs ~/work/scala ~/work/couchdb ~/work/js ~/work/js/node.js ~/work/js/coffeescript ~/work/haskell ~/work/erlang ~/work/cocoa ~/work/python ~/.oh-my-zsh ~/.emacs.d ~/work/DIS)
 
 autoload zmv
 ttyctl -f
