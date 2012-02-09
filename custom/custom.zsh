@@ -89,6 +89,8 @@ alias dh='dirs -v'
 alias p='pushd'
 alias P='popd'
 
+alias du1='du -hs *(/)'
+
 alias grep='grep --color=auto'
 
 # cvs
