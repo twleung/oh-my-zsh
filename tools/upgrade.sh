@@ -1,4 +1,4 @@
-echo -e "\033[0;34mUpgrading Oh My Zsh\033[0m"
+printf "\033[0;34mUpgrading Oh My Zsh\033[0m"
 
 git_branches=`git remote -v`
 #echo "branches"
