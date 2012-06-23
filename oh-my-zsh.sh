@@ -51,7 +51,7 @@ for plugin ($plugins); do
 done
 
 # Load all of your custom configurations from custom/
-for config_file ($ZSH_CUSTOM/*.zsh(.N)) source $config_file
+for config_file ($ZSH_CUSTOM/*.zsh(N)) source $config_file
 
 # Load platform specifc customizations - TWL
 for config_file ($ZSH/custom/`uname -s`/*.zsh) source $config_file
