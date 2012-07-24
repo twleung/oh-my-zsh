@@ -34,7 +34,7 @@ export EC2_HOME=~/.ec2
 
 export INFOPATH=$INFOPATH:$TWL_DOC/python/info
 export MANPATH=$TWL_MAN:$GIT_HOME/man:$ERLANG_MAN:$MANPATH
-export FPATH=$TWL_LIB/zsh/func:$FPATH
+export FPATH=$TWL_LIB/zsh/func:/usr/local/share/zsh-completions:$FPATH
 export LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH
 
 export PATH=$CLOJURESCRIPT_HOME/bin:$SCALA_HOME/bin:$M2_HOME/bin:$TWL_BIN/perl:$TWL_BIN/`uname -s`:$TWL_BIN:/usr/local/bin:$PATH
