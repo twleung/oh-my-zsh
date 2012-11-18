@@ -20,3 +20,4 @@ setopt APPEND_HISTORY
 DIRSTACKSIZE='20'
 setopt histfindnodups histignorealldups histreduceblanks
 setopt hist_allow_clobber
+
