@@ -89,6 +89,8 @@ alias dh='dirs -v'
 alias p='pushd'
 alias P='popd'
 
+alias du1='du -hs *(/)'
+
 alias grep='grep --color=auto'
 
 # cvs
@@ -224,6 +226,16 @@ remove-from-path () {
   '"$1"'=( "$build[@]" )
   '
 }
+
+#via https://twitter.com/#!/dysinger/status/177520557351374849
+function each() {
+    x=$1;
+    shift;
+    for y in `find $PWD -name $x`;do 
+	pushd "`dirname $y`";$@;popd;
+    done
+}
+# example: each .git git remote update
 
 setopt cdablevars
 dirstack=(~ ~/work ~/work/clojure ~/work/clojure/cljs ~/work/scala ~/work/couchdb ~/work/js ~/work/js/node.js ~/work/js/coffeescript ~/work/haskell ~/work/erlang ~/work/cocoa ~/work/python ~/.oh-my-zsh ~/.emacs.d ~/work/DIS)
