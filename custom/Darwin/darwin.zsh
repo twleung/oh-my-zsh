@@ -59,6 +59,7 @@ function check-dict-attacks() {
 
 # via http://www.commandlinefu.com/commands/view/2440/use-quicklook-from-the-command-line-without-verbose-output
 function qlook() { qlmanage -p "$@" >& /dev/null & }
+function ql() { qlmanage -p "$@" >& /dev/null & }
 
 #via http://weblog.savanne.be/153-performance-tip-of-the-day
 function vacuum-firefox () {
