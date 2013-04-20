@@ -1,4 +1,7 @@
-printf "\033[0;34mUpgrading Oh My Zsh\033[0m"
+current_path=`pwd`
+current_path=${current_path/ /\\ }
+printf '\033[0;34m%s\033[0m\n' "Upgrading Oh My Zsh"
+cd "$ZSH"
 
 git_branches=`git remote -v`
 #echo "branches"
