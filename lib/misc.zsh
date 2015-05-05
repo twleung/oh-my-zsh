@@ -9,18 +9,6 @@ setopt long_list_jobs
 export PAGER=less
 export LC_CTYPE=$LANG
 
-# TWL
-export REPORTTIME=5
-export READNULLCMD='less'
-
-setopt nohup ignoreeof
-setopt noclobber
-setopt printexitvalue
-
-setopt autocontinue checkjobs
-setopt pathdirs
-setopt chaselinks
-
 ## super user alias
 alias _='sudo'
 alias please='sudo'
@@ -32,4 +20,16 @@ alias afind='ack-grep -il'
 if [[ -z "$LC_CTYPE" && -z "$LC_ALL" ]]; then
 	export LC_CTYPE=${LANG%%:*} # pick the first entry from LANG
 fi
+
+# TWL
+export REPORTTIME=5
+export READNULLCMD='less'
+
+setopt nohup ignoreeof
+setopt noclobber
+setopt printexitvalue
+
+setopt autocontinue checkjobs
+setopt pathdirs
+setopt chaselinks
 
