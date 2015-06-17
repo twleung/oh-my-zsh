@@ -10,8 +10,8 @@ done
 setopt long_list_jobs
 
 ## pager
-export PAGER="less"
-export LESS="-R"
+export PAGER=less
+export LC_CTYPE=$LANG
 
 ## super user alias
 alias _='sudo'
