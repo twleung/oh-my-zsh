@@ -25,6 +25,9 @@ if [[ -z "$LC_CTYPE" && -z "$LC_ALL" ]]; then
 	export LC_CTYPE=${LANG%%:*} # pick the first entry from LANG
 fi
 
+# recognize comments
+setopt interactivecomments
+
 # TWL
 export REPORTTIME=5
 export READNULLCMD='less'
@@ -37,5 +40,3 @@ setopt autocontinue checkjobs
 setopt pathdirs
 setopt chaselinks
 
-# recognize comments
-setopt interactivecomments
