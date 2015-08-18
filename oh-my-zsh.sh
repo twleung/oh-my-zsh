@@ -29,11 +29,6 @@ for config_file ($ZSH/lib/*.zsh); do
   source $config_file
 done
 
-# Load all of your custom configurations from custom/
-for config_file ($ZSH_CUSTOM/*.zsh(N)); do
-  source $config_file
-done
-unset config_file
 
 is_plugin() {
   local base_dir=$1
