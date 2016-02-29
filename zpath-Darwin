@@ -3,7 +3,7 @@
 
 #export GIT_HOME=/usr/local/git
 
-export JAVA_HOME=`/usr/libexec/java_home -v 1.7`
+export JAVA_HOME=`/usr/libexec/java_home -v 1.8`
 export PATH=/usr/local/share/npm/bin:/Developer/Tools:$PATH
 
 # no /opt/local/bin on OS X so remove
