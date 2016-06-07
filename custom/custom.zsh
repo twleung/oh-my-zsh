@@ -237,6 +237,20 @@ function each() {
 }
 # example: each .git git remote update
 
+#via https://gist.github.com/nriley/34d92c9eb2eaf1073c04
+
+ts() {
+    local tspty=tspty.$(/usr/bin/uuidgen)
+    zmodload zsh/zpty
+    zpty $tspty $@
+    setopt localtraps
+    TRAPINT() { zpty -d $tspty }
+    while zpty -r $tspty line; do
+        print -Pn '%B%D{%m/%d %H:%M:%S}%b '
+        print -n -- $line
+    done
+}
+
 setopt cdablevars
 dirstack=(~ ~/work ~/work/clojure ~/work/clojure/cljs ~/work/scala ~/work/couchdb ~/work/js ~/work/js/node.js ~/work/js/coffeescript ~/work/haskell ~/work/erlang ~/work/cocoa ~/work/python ~/.oh-my-zsh ~/.emacs.d ~/work/DIS)
 
