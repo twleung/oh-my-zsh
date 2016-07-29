@@ -3,6 +3,7 @@
 
 #export GIT_HOME=/usr/local/git
 
+export PLOCAL="/Users/twl/Dropbox/Local Personal"
 export JAVA_HOME=`/usr/libexec/java_home -v 1.8`
 export PATH=/usr/local/share/npm/bin:/Developer/Tools:$PATH
 
