@@ -11,7 +11,7 @@ alias SubEthaEdit='open -a SubEthaEdit '
 alias md5sum='/sbin/md5'
 
 # hibernation control on OS X - via http://www.almaer.com/blog/archives/001182.html
-alias hibernateon='sudo pmset -a hibernatemode 1' 
+alias hibernateon='sudo pmset -a hibernatemode 1'
 alias hibernateoff='sudo pmset -a hibernatemode 0'
 
 # quit and relaunch from http://www.macosxhints.com/article.php?story=20040623231530448
@@ -46,7 +46,7 @@ alias killds_stores='find . -type f -a -name .DS_Store -exec rm {} \;'
 # quicksilver dates via http://forums.blacktree.com/viewtopic.php?p=6192#6192
 alias qsdatefull="date \"+%Y/%m/%d (%a) @ %H:%M:%S\" | qs"
 alias qsdateonly="date \"+%Y/%m/%d\" | qs"
-alias qsdatetime="date \"+%H:%M:%S\" | qs" 
+alias qsdatetime="date \"+%H:%M:%S\" | qs"
 
 # via jwalker@codefab.com on osxhack
 alias killem='IFSTemp=$IFS IFS=$IFS[3] thePS=(`ps`); IFS=$IFSTemp; select i in $thePS; do; if [[ x$REPLY = xq ]] then break; fi; echo kill $i[(w)1]; kill $i[(w)1]; done'
@@ -64,7 +64,7 @@ function ql() { qlmanage -p "$@" >& /dev/null & }
 #via http://weblog.savanne.be/153-performance-tip-of-the-day
 function vacuum-firefox () {
   for f in ~/Library/Application\ Support/Firefox/Profiles/*/*.sqlite; do
-    sqlite3 "$f" 'VACUUM;'; 
+    sqlite3 "$f" 'VACUUM;';
   done
 }
 
@@ -90,7 +90,7 @@ function stopwatch_precmd () {
 #	print $stop >>/tmp/log
 #	print $elapsed >>/tmp/log
 	max=${PREEXEC_MAX:-3}
-	
+
 	if [[ $elapsed > $max ]]; then
 		growlnotify -n "iTerm" -m "took $elapsed secs"
 	fi
@@ -101,6 +101,12 @@ alias to-github="grep github ./.git/config | sed -e 's/^.*\(github.com.*\)\.git$
 
 # https://github.com/alloy/terminal-notifier
 alias terminal-notifier=~/bin/Darwin/terminal-notifier.app/Contents/MacOS/terminal-notifier
+
+# choosy
+
+function choosy() {
+  open x-choosy://open/$1
+}
 
 autoload -U add-zsh-hook
 add-zsh-hook precmd stopwatch_precmd
