@@ -103,6 +103,12 @@ alias to-github="grep github ./.git/config | sed -e 's/^.*\(github.com.*\)\.git$
 # https://github.com/alloy/terminal-notifier
 alias terminal-notifier=~/bin/Darwin/terminal-notifier.app/Contents/MacOS/terminal-notifier
 
+# choosy
+
+function choosy() {
+  open x-choosy://open/$1
+}
+
 autoload -U add-zsh-hook
 add-zsh-hook precmd stopwatch_precmd
 add-zsh-hook preexec stopwatch_preexec
