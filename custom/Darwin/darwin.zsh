@@ -92,7 +92,7 @@ function stopwatch_precmd () {
 	max=${PREEXEC_MAX:-3}
 
 	if [[ $elapsed > $max ]]; then
-    /usr/local/bin/terminal-notifier iTerm -title "zsh" -message "took $elapsed secs"
+    /usr/local/bin/terminal-notifier iTerm -title $PREEXEC_CMD -message "took $elapsed secs"
 #    		growlnotify -n "iTerm" -m "took $elapsed secs"
 	fi
 }
