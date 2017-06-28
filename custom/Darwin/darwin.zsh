@@ -114,4 +114,6 @@ add-zsh-hook precmd stopwatch_precmd
 add-zsh-hook preexec stopwatch_preexec
 
 [[ -e /usr/local/bin/virtualenvwrapper.sh ]] && . /usr/local/bin/virtualenvwrapper.sh
-workon darwin
+if (($+comamands[workon])); then # execute workon only if present
+  workon darwin
+fi
