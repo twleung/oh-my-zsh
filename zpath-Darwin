@@ -6,7 +6,7 @@
 fpath=(/usr/local/share/zsh-completions $fpath)
 
 export PLOCAL="/Users/twl/Dropbox/Local Personal"
-export JAVA_HOME=`/usr/libexec/java_home -v 1.8`
+export JAVA_HOME=`/usr/libexec/java_home -v 12`
 
 # these paths for homebrew installed Go
 export GOROOT=/usr/local/opt/go/libexec
