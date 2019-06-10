@@ -109,11 +109,25 @@ function choosy() {
   open x-choosy://open/$1
 }
 
+# https://boredzo.org/blog/archives/2016-08-15/colorized-man-pages-understood-and-customized
+function man() {
+    env \
+        LESS_TERMCAP_mb=$(printf "\e[1;31m") \
+        LESS_TERMCAP_md=$(printf "\e[1;31m") \
+        LESS_TERMCAP_me=$(printf "\e[0m") \
+        LESS_TERMCAP_se=$(printf "\e[0m") \
+        LESS_TERMCAP_so=$(printf "\e[1;44;33m") \
+        LESS_TERMCAP_ue=$(printf "\e[0m") \
+        LESS_TERMCAP_us=$(printf "\e[1;32m") \
+            man "$@"
+}
+
 autoload -U add-zsh-hook
 add-zsh-hook precmd stopwatch_precmd
 add-zsh-hook preexec stopwatch_preexec
 
+VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python3 # switching to python3
 [[ -e /usr/local/bin/virtualenvwrapper.sh ]] && . /usr/local/bin/virtualenvwrapper.sh
 if (($+comamands[workon])); then # execute workon only if present
-  workon darwin
+  workon darwin3
 fi
