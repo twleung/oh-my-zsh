@@ -251,7 +251,12 @@ ts() {
     done
 }
 
+pfind() {
+    find /Volumes/Prima/v /Volumes/home -iname "*$1*" |& less -i
+}
+
 setopt cdablevars
+setopt extendedglob
 dirstack=(~ ~/work ~/work/clojure ~/work/clojure/cljs ~/work/scala ~/work/couchdb ~/work/js ~/work/js/node.js ~/work/js/coffeescript ~/work/haskell ~/work/erlang ~/work/cocoa ~/work/python ~/.oh-my-zsh ~/.emacs.d ~/work/DIS)
 
 autoload zmv

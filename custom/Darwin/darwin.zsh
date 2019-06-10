@@ -85,11 +85,15 @@ function stopwatch_precmd () {
 	stop=$(date +'%s')
 	start=${PREEXEC_TIME:-$stop}
 	let elapsed=$(($stop-$start))
+  if [ "$PREEXEC_CMD" = "500px.js" ]; then
+     return
+  fi
+
 #	print "precmd $PREEXEC_TIME" >>/tmp/log
 #	print $start >>/tmp/log
 #	print $stop >>/tmp/log
 #	print $elapsed >>/tmp/log
-	max=${PREEXEC_MAX:-3}
+	max=${PREEXEC_MAX:-5}
 
 	if [[ $elapsed > $max ]]; then
     /usr/local/bin/terminal-notifier iTerm -title $PREEXEC_CMD -message "took $elapsed secs"
@@ -112,6 +116,9 @@ function choosy() {
 autoload -U add-zsh-hook
 add-zsh-hook precmd stopwatch_precmd
 add-zsh-hook preexec stopwatch_preexec
+
+# for homebrew git-extras
+source /usr/local/opt/git-extras/share/git-extras/git-extras-completion.zsh
 
 [[ -e /usr/local/bin/virtualenvwrapper.sh ]] && . /usr/local/bin/virtualenvwrapper.sh
 workon darwin
