@@ -1,5 +1,6 @@
 #!/bin/zsh
-export LESSOPEN="| $HOME/bin/lesspipe.sh %s"
+#export LESSOPEN="| $HOME/bin/lesspipe.sh %s"
+export LESSOPEN="|/usr/local/bin/lesspipe.sh %s" LESS_ADVANCED_PREPROCESSOR=1
 
 cdpath=($cdpath $HOME/Library "$HOME/Library/Application Support")
 
