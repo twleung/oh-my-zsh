@@ -113,6 +113,9 @@ function choosy() {
   open x-choosy://open/$1
 }
 
+# https://eternalstorms.wordpress.com/2014/12/18/using-yoink-from-the-terminal-on-os-x/
+alias yoink=“open -a Yoink”
+
 autoload -U add-zsh-hook
 add-zsh-hook precmd stopwatch_precmd
 add-zsh-hook preexec stopwatch_preexec
