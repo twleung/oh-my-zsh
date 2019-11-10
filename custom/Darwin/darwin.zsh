@@ -127,8 +127,9 @@ autoload -U add-zsh-hook
 add-zsh-hook precmd stopwatch_precmd
 add-zsh-hook preexec stopwatch_preexec
 
-VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python3 # switching to python3
-[[ -e /usr/local/bin/virtualenvwrapper.sh ]] && . /usr/local/bin/virtualenvwrapper.sh
-if (($+comamands[workon])); then # execute workon only if present
-  workon darwin3
-fi
+# virtualenvwrapper breaks Xinova X platform so disable locally for now
+#VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python3 # switching to python3
+#[[ -e /usr/local/bin/virtualenvwrapper.sh ]] && . /usr/local/bin/virtualenvwrapper.sh
+#if (($+comamands[workon])); then # execute workon only if present
+#  workon darwin3
+#fi
