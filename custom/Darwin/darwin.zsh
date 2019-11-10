@@ -124,4 +124,6 @@ add-zsh-hook preexec stopwatch_preexec
 source /usr/local/opt/git-extras/share/git-extras/git-extras-completion.zsh
 
 [[ -e /usr/local/bin/virtualenvwrapper.sh ]] && . /usr/local/bin/virtualenvwrapper.sh
-workon darwin
+if (($+comamands[workon])); then # execute workon only if present
+  workon darwin
+fi

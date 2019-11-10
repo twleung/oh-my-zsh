@@ -7,7 +7,10 @@ fpath=(/usr/local/share/zsh-completions $fpath)
 
 export PLOCAL="/Users/twl/Dropbox/Local Personal"
 export JAVA_HOME=`/usr/libexec/java_home -v 1.8`
-export PATH=/usr/local/share/npm/bin:/Developer/Tools:$PATH
+
+# these paths for homebrew installed Go
+export GOROOT=/usr/local/opt/go/libexec
+export GOPATH=$HOME/.go
 
 # no /opt/local/bin on OS X so remove
 export PATH=${PATH/:\/opt\/local\/bin//}

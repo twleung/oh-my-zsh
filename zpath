@@ -41,7 +41,7 @@ export LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH
 oszpath=~/.oh-my-zsh/zpath-`uname -s`
 [[ -e $oszpath ]] && . $oszpath
 
-export PATH=$CARGO_HOME:$CLOJURESCRIPT_HOME/bin:$SCALA_HOME/bin:$M2_HOME/bin:$JAVA_HOME/bin:$TWL_BIN/perl:$TWL_BIN/`uname -s`:$TWL_BIN:/usr/local/bin:$PATH
+export PATH=$CARGO_HOME:$CLOJURESCRIPT_HOME/bin:$SCALA_HOME/bin:$GOROOT/bin:$GOPATH/bin:$M2_HOME/bin:$JAVA_HOME/bin:$TWL_BIN/perl:$TWL_BIN/`uname -s`:$TWL_BIN:/usr/local/bin:$PATH
 
 #hostzpath=~/.zpath-`~/bin/hostname`
 #[[ -e $hostzpath ]] && . $hostzpath
