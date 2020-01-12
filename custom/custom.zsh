@@ -256,3 +256,5 @@ dirstack=(~ ~/work ~/work/clojure ~/work/clojure/cljs ~/work/scala ~/work/couchd
 
 autoload zmv
 ttyctl -f
+
+source $HOME/Library/Preferences/org.dystroy.broot/launcher/bash/br
