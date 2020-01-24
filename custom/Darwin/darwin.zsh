@@ -110,6 +110,8 @@ function choosy() {
   open x-choosy://open/$1
 }
 
+alias airport=/System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport
+
 # https://boredzo.org/blog/archives/2016-08-15/colorized-man-pages-understood-and-customized
 function man() {
     env \
