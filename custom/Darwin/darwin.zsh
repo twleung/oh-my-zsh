@@ -123,6 +123,9 @@ add-zsh-hook preexec stopwatch_preexec
 # for homebrew git-extras
 source /usr/local/opt/git-extras/share/git-extras/git-extras-completion.zsh
 
+# for broot
+source $HOME/Library/Preferences/org.dystroy.broot/launcher/bash/br
+
 [[ -e /usr/local/bin/virtualenvwrapper.sh ]] && . /usr/local/bin/virtualenvwrapper.sh
 if (($+comamands[workon])); then # execute workon only if present
   workon darwin
