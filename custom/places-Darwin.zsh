@@ -4,4 +4,9 @@ nnwc="$HOME/Library/Caches/NetNewsWire"
 nnws="${appsup}/NetNewsWire"
 nnw="$HOME/Documents/NNW"
 
-cdable_vars=(appsup ffs nnw nnwc nnws $cdable_vars)
+
+# location variable for iCloud Drive
+icloud_drive="$HOME/Library/Mobile Documents/com~apple~CloudDocs"
+
+
+cdable_vars=(appsup ffs nnw nnwc nnws icloud_drive $cdable_vars)
